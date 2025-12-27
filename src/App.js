@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./components/Header";
+import { Routes, Route } from "react-router-dom";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import Homepage from "./Pages/Homepage";
+import CoinPage from "./Pages/CoinPage";
+import CustomAlert from "./components/Alert";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#fff",
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Header />
+      <Routes>
+        <Route path="/" Component={Homepage} />
+        <Route path="/coins/:id" Component={CoinPage} />
+      </Routes>
+      <CustomAlert />
+    </ThemeProvider>
   );
 }
 
